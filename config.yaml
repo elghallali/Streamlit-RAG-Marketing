@@ -1,0 +1,16 @@
+credentials:
+  usernames:
+    elghallali:
+      email: y.elghallali@gmail.com
+      failed_login_attempts: 0 # Will be managed automatically
+      logged_in: False # Will be managed automatically
+      name: Yassine EL GHALLALI
+      password: $2b$12$WQJt4gwAHvTTe1nbCW.bxeYsEDvlSWJ/.d8UN7uDnh0mt8ulwEpEi # Will be hashed automatically
+    
+cookie:
+  expiry_days: 30
+  key: some_signature_key # Must be string
+  name: some_cookie_name
+pre-authorized:
+  emails:
+  - y.elghallali@gmail.com

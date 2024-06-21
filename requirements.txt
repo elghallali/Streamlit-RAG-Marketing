@@ -16,3 +16,6 @@ llama-index
 langchain_community
 dvc
 dvc-gdrive
+ipykernel
+beautifulsoup4
+streamlit-authenticator

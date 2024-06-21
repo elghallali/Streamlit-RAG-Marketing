@@ -2,6 +2,10 @@ import streamlit as st
 import os
 from pathlib import Path
 import warnings
+
+import yaml
+from yaml.loader import SafeLoader
+import streamlit_authenticator as stauth
 from src.populate_database import clear_database, embedding_main
 from src.query_data import query_rag
 from static.style.style import style
@@ -18,27 +22,49 @@ st.set_page_config(page_title="Chatbot | Home", page_icon=":robot_face:", layout
 
 style()
 
-with st.sidebar:
-    st.header("Enter your datasource")
-    uploaded_files = st.file_uploader(
-        "Import your data",
-        key="data_import",
-        accept_multiple_files=True,
-        label_visibility="hidden",
-    )
-    if uploaded_files:
-        for uploaded_file in uploaded_files:
-            bytes_data = uploaded_file.read()
-            file_path = os.path.join(path_articles, uploaded_file.name)
-            with open(file_path, "wb") as f:
-                f.write(bytes_data)
-        # Assuming embedding_main() is defined elsewhere
-        embedding_main(
-            DATA_PATH, CHROMA_PATH
-        )  # Make sure this function is defined or imported
+with open('./config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
-    if st.button("Empty Data Source"):
-        clear_database(CHROMA_PATH)
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['pre-authorized']
+)
+
+with st.sidebar:
+    authenticator.login()
+    if st.session_state["authentication_status"]:
+        
+        st.header(f'*{st.session_state["name"]}*')
+        st.markdown("""<br><br>""",unsafe_allow_html=True)
+        st.subheader("Enter your datasource")
+        uploaded_files = st.file_uploader(
+            "Import your data",
+            key="data_import",
+            accept_multiple_files=True,
+            label_visibility="hidden",
+        )
+        if uploaded_files:
+            for uploaded_file in uploaded_files:
+                bytes_data = uploaded_file.read()
+                file_path = os.path.join(path_articles, uploaded_file.name)
+                with open(file_path, "wb") as f:
+                    f.write(bytes_data)
+            # Assuming embedding_main() is defined elsewhere
+            embedding_main(
+                DATA_PATH, CHROMA_PATH
+            )  # Make sure this function is defined or imported
+    
+        if st.button("Empty Data Source", type="primary"):
+            clear_database(CHROMA_PATH)
+        st.markdown("""<br><br>""",unsafe_allow_html=True)
+        authenticator.logout()
+    elif st.session_state["authentication_status"] is False:
+        st.error('Username/password is incorrect')
+    elif st.session_state["authentication_status"] is None:
+        st.warning('Please enter your username and password')
 
 st.markdown(
     """

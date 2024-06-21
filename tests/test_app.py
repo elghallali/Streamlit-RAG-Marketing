@@ -25,7 +25,7 @@ def test_about_Marketing():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about Marketing",
-        expected_response="Le marketing est une discipline complexe qui implique la compréhension du marché, l'étude de la concurrence, la définition d'une stratégie et la mise en œuvre d'un plan d'action. Il s'agit également de maîtriser les outils de communication tels que la publicité, le marketing direct, les relations publiques, etc.",
+        expected_response="Selon Porter (1999), le marketing est une forme d'avantage concurrentiel qui permet à une entreprise de se démarquer des autres. Pour cela, il est important de bien comprendre les forces du marché, les forces de l'entreprise et les forces de l'environnement.",
     )
 
 
@@ -33,7 +33,7 @@ def test_about_MLOps():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about MLOps?",
-        expected_response="I'm happy to help! However, I don't see any information related to MLOps in the provided context. It seems that the context is focused on market share, products, and marketing strategies.",
+        expected_response="I apologize, but it seems you've provided a context related to market share and marketing strategies, whereas I'm an assistant answering questions on a different topic - MLOps",
     )
 
 

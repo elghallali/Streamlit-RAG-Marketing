@@ -89,7 +89,8 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/streamlit-chatbot-rag-marketing:${{ github.sha}}
             ${{ secrets.DOCKER_USERNAME }}/streamlit-chatbot-rag-marketing:latest
-            
+          build-args: |
+            GDRIVE_CREDENTIALS_DATA=${{ secrets.GDRIVE_CREDENTIALS_DATA }}
   deploy:
     needs: [build,]
     runs-on: ubuntu-latest

@@ -43,6 +43,17 @@ def style():
             padding-right: 15px;
         }}
         
+        [data-testid="stSidebarUserContent"] [data-testid="stMarkdownContainer"] h2 {{
+            text-align: center;
+        }}
+        
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="element-container"]:last-child [data-testid="stButton"] {{
+            display: flex;
+            justify-content: flex-end;
+            
+            
+        }}
+        
         #MainMenu {{visibility: hidden;}}
         
         footer {{visibility: hidden;}}
