@@ -22,7 +22,7 @@ st.set_page_config(page_title="Chatbot | Home", page_icon=":robot_face:", layout
 
 style()
 
-with open('./config.yaml') as file:
+with open('./config.yaml', encoding="utf-8") as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
