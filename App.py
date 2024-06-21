@@ -40,7 +40,8 @@ with st.sidebar:
     if st.button("Empty Data Source"):
         clear_database(CHROMA_PATH)
 
-st.markdown("""
+st.markdown(
+    """
 
 <center>
 
@@ -49,7 +50,9 @@ st.markdown("""
 </center>
 
 <div style="height: 30px;"></div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Initialize chat history
 if "messages" not in st.session_state:

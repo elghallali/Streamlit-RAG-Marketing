@@ -18,7 +18,7 @@ list_of_files = [
     "requirements.txt",
     "Makefile",
     "App.py",
-    "notebooks/experiments.ipynb"
+    "notebooks/experiments.ipynb",
 ]
 
 #######################################################################################
@@ -45,7 +45,7 @@ requirements_list = [
     "llama-index",
     "langchain_community",
     "dvc",
-    "dvc-gdrive"
+    "dvc-gdrive",
 ]
 
 #######################################################################################
@@ -63,7 +63,7 @@ makefile_list = [
     "all: install lint test",
     "ollama:\n\tcurl -fsSL https://ollama.com/install.sh | sh",
     "nomic-embed-text:\n\tollama pull nomic-embed-text",
-    "llama3:\n\tollama pull llama3"
+    "llama3:\n\tollama pull llama3",
 ]
 
 #######################################################################################
