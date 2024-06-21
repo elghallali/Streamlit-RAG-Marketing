@@ -1,0 +1,101 @@
+name: Stremlit Chatbot RAG test with Github Actions
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  
+jobs:
+  
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Lint with pylint
+      run: |
+        make lint
+    - name: Format code
+      run: |
+        make format
+  test:
+    needs: [lint,]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Install Ollama
+      run: |
+        make ollama
+    - name: Add llama3 Model to Ollama
+      run: |
+        make llama3
+    - name : Add nomic-embed-text Model to Ollama
+      run: |
+        make nomic-embed-text
+    - name: Pull Data With DVC
+      env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          GDRIVE_CREDENTIALS_DATA : ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      run: |
+        dvc pull tests/test_data
+    - name: Test with pytest
+      run: |
+        make test
+    - name: Format code
+      run: |
+        make format
+
+  build:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/streamlit-chatbot-rag-marketing:${{ github.sha}}
+            ${{ secrets.DOCKER_USERNAME }}/streamlit-chatbot-rag-marketing:latest
+            
+  deploy:
+    needs: [build,]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: deploy App
+      run: |
+        echo "deployment success"

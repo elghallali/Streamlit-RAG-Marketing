@@ -1,0 +1,18 @@
+pytest
+pytest-cov
+pylint
+fire
+black
+streamlit
+ipython
+pypdf
+langchain
+chromadb # Vector storage
+groq
+langchain-core
+langchain-groq
+gradio
+llama-index
+langchain_community
+dvc
+dvc-gdrive

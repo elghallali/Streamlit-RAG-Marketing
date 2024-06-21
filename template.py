@@ -27,7 +27,7 @@ list_of_files = [
 #####                                                                             #####
 #######################################################################################
 
-requirements_list = [ 
+requirements_list = [
     "pytest",
     "pytest-cov",
     "pylint",
