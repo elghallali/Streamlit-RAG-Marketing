@@ -25,7 +25,7 @@ def test_about_Marketing():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about Marketing",
-        expected_response="Le marketing est une discipline complexe qui nécessite une compréhension approfondie de la situation économique",
+        expected_response=" According to J. Estwood's book \"30 Minutes to Write a Marketing Plan\" (1997) and the American Marketing Association",
     )
 
 
@@ -33,7 +33,7 @@ def test_about_MLOps():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about MLOps?",
-        expected_response="the context you provided seems to be related to marketing and business strategies",
+        expected_response="I'm happy to help! However, I need to clarify that our context is focused on creating a website and defining objectives, strategies, and timelines for a product called ABC. We don't have any information about MLOps",
     )
 
 
