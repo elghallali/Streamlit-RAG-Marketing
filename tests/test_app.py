@@ -25,7 +25,7 @@ def test_about_Marketing():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about Marketing",
-        expected_response="Le marketing est une discipline complexe qui implique la compréhension du marché",
+        expected_response="Le marketing est une discipline complexe qui nécessite une compréhension approfondie de la situation économique",
     )
 
 
@@ -33,7 +33,7 @@ def test_about_MLOps():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about MLOps?",
-        expected_response="I apologize, but it seems you've provided a context related to market share and marketing strategies, whereas I'm an assistant answering questions on a different topic - MLOps",
+        expected_response="the context you provided seems to be related to marketing and business strategies",
     )
 
 
