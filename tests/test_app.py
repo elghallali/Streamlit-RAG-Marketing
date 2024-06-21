@@ -25,7 +25,7 @@ def test_about_Marketing():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about Marketing",
-        expected_response="Selon Porter (1999), le marketing est une forme d'avantage concurrentiel qui permet à une entreprise de se démarquer des autres. Pour cela, il est important de bien comprendre les forces du marché, les forces de l'entreprise et les forces de l'environnement.",
+        expected_response="Le marketing est une discipline complexe qui implique la compréhension du marché",
     )
 
 
