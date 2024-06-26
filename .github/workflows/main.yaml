@@ -55,6 +55,8 @@ jobs:
       run: |
         dvc pull tests/data_test
     - name: Test with pytest
+      env:
+          BASE_URL: ${{secrets.BASE_URL_LOCAL}}
       run: |
         make test
     - name: Format code
