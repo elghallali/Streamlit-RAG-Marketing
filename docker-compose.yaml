@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ollama-container:
+    image: ollama/ollama
+    volumes:
+      - ./data/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+    command: /bin/bash -c "ollama pull llama3 && ollama pull nomic-embed-text && ollama start"
+  streamlit-app:
+    image: elghallali/streamlit-chatbot-rag-marketing
+    ports:
+      - 8501:8501
+    depends_on:
+      - ollama-container

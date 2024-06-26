@@ -10,7 +10,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 
-def embedding_main(data_path, chroma_path):
+def embedding_main(url, data_path, chroma_path):
 
     tic = time.time()
     # Create (or update) the data store.
@@ -20,7 +20,7 @@ def embedding_main(data_path, chroma_path):
         return False
 
     chunks = split_documents(documents)
-    add_to_chroma(chroma_path, chunks)
+    add_to_chroma(url, chroma_path, chunks)
     toc = time.time()
     print(f"The time is :{(toc - tic)} seconds")
     return True
@@ -42,10 +42,10 @@ def split_documents(documents: List[Document]):
     return text_splitter.split_documents(documents)
 
 
-def add_to_chroma(chroma_path, chunks: List[Document]):
+def add_to_chroma(url: str, chroma_path: str, chunks: List[Document]):
     # Load the existing database.
     db = Chroma(
-        persist_directory=chroma_path, embedding_function=get_embedding_function()
+        persist_directory=chroma_path, embedding_function=get_embedding_function(url)
     )
 
     # Calculate Page IDs.

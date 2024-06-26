@@ -54,6 +54,21 @@ def style():
             
         }}
         
+        [data-testid="stMarkdownContainer"] p {{
+            font-size: 1.4rem;
+            font-weight: 400;
+        }}
+        
+        [data-testid="stMarkdownContainer"] li {{
+            font-size: 1.4rem;
+            font-weight: 400;
+        }}
+        
+        [data-baseweb="base-input"] textarea {{
+            font-size: 1.4rem;
+            font-weight: 400;
+        }}
+        
         #MainMenu {{visibility: hidden;}}
         
         footer {{visibility: hidden;}}

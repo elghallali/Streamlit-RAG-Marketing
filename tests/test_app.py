@@ -2,6 +2,7 @@ import os
 from src.populate_database import clear_database, embedding_main
 from src.query_data import query_rag
 from langchain_community.llms.ollama import Ollama
+from dotenv import load_dotenv
 
 EVAL_PROMPT = """
 Expected Response: {expected_response}
@@ -9,23 +10,24 @@ Actual Response: {actual_response}
 ---
 (Answer with 'true' or 'false') Does the actual response match the expected response? 
 """
-
+load_dotenv()
 test_data_path = "./tests/data_test"
 chromaDB_test_path = "./tests/chromaDB_Test"
+BASE_URL = os.getenv("BASE_URL")
 
 
 def test_embedding():
     """
     Test the embedding function to ensure it successfully processes the test data.
     """
-    assert embedding_main(test_data_path, chromaDB_test_path) == True
+    assert embedding_main(BASE_URL, test_data_path, chromaDB_test_path) == True
 
 
 def test_about_Marketing():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about Marketing",
-        expected_response=" According to J. Estwood's book \"30 Minutes to Write a Marketing Plan\" (1997) and the American Marketing Association",
+        expected_response=' According to J. Estwood\'s book "30 Minutes to Write a Marketing Plan" (1997) and the American Marketing Association',
     )
 
 
@@ -38,7 +40,7 @@ def test_about_MLOps():
 
 
 def query_and_validate(chromaDB_path: str, question: str, expected_response: str):
-    response_text = query_rag(chromaDB_path, question)
+    response_text = query_rag(BASE_URL, chromaDB_path, question)
     prompt = EVAL_PROMPT.format(
         expected_response=expected_response, actual_response=response_text
     )

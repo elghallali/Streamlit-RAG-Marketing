@@ -15,9 +15,9 @@ prompt_template = ChatPromptTemplate.from_messages(
 )
 
 
-def query_rag(chroma_path, query_text: str) -> str:
+def query_rag(url, chroma_path, query_text: str) -> str:
     # Prepare the DB.
-    embedding_function = get_embedding_function()
+    embedding_function = get_embedding_function(url)
     db = Chroma(persist_directory=chroma_path, embedding_function=embedding_function)
 
     # Search the DB.
@@ -28,7 +28,7 @@ def query_rag(chroma_path, query_text: str) -> str:
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt = prompt_template.format(context=context_text, question=query_text)
 
-    model = Ollama(model="llama3", temperature=0)
+    model = Ollama(model="llama3", temperature=0, base_url=url, verbose=True)
 
     generated_response = ""
     for word in model.stream(prompt):
