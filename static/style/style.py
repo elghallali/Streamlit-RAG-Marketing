@@ -69,6 +69,11 @@ def style():
             font-weight: 400;
         }}
         
+        [data-testid="stException"] {{
+            background : rgba(0,0,0,0.9);
+            border: 1px solid #800080;
+        }}
+        
         #MainMenu {{visibility: hidden;}}
         
         footer {{visibility: hidden;}}

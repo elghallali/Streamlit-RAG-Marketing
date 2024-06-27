@@ -6,7 +6,9 @@ services:
       - ./data/ollama:/root/.ollama
     ports:
       - 11434:11434
-    command: /bin/bash -c "ollama pull llama3 && ollama pull nomic-embed-text && ollama start"
+    command:
+      - /bin/bash -c "ollama pull llama3"
+      - /bin/bash -c "ollama pull nomic-embed-text"
   streamlit-app:
     image: elghallali/streamlit-chatbot-rag-marketing
     ports:
