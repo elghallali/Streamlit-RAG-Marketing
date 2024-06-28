@@ -17,7 +17,7 @@ ENV BASE_URL=$BASE_URL
 
 COPY . /app
 
-RUN echo $BASE_URL > /app/.env
+RUN echo "BASE_URL=$BASE_URL" > /app/.env
 RUN mkdir -p /root/.config/gdrive && echo $GDRIVE_CREDENTIALS > /root/.config/gdrive/credentials.json
 RUN dvc pull data
 
