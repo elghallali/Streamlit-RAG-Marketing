@@ -13,5 +13,7 @@ services:
     hostname: ChatbotMarketing
     ports:
       - 8501:8501
+    volumes:
+      - ./data/chroma:/app/chroma
     depends_on:
       - ModelHandler
