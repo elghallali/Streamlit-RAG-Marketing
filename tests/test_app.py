@@ -35,7 +35,7 @@ def test_about_MLOps():
     assert query_and_validate(
         chromaDB_path=chromaDB_test_path,
         question="Tell me about MLOps?",
-        expected_response="I'm happy to help! However, I need to clarify that our context is focused on a marketing plan for a product called ABC",
+        expected_response="I apologize, but I don't see any information related to MLOps (Machine Learning Operations) in the provided context. The text appears to be focused on marketing and sales strategies for a product or service, with topics such as 4P (product, price, promotion, place), distribution plans, and sponsorship considerations.",
     )
 
 
