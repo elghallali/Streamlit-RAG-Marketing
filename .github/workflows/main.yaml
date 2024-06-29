@@ -64,7 +64,7 @@ jobs:
         make format
 
   build:
-    needs: [lint,]
+    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       -
